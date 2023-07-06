@@ -1,0 +1,89 @@
+<?php
+class Point2D {
+    private $x;
+    private $y;
+    public function __construct($x, $y) {
+        $this->x = $x;
+        $this->y = $y;
+    }
+
+    public function calDistance($otherPoint) {
+        $distance = sqrt(pow($this->x - $otherPoint->x, 2) + pow($this->y - $otherPoint->y, 2));
+        return $distance;
+    }
+}
+
+$point_1 = new Point2D(3,5);
+$point_2 = new Point2D(7,11);
+$distance = $point_1->calDistance($point_2);
+echo "The distance between point 1 and point 2 is: " . $distance . "<br>";
+
+class IntegerArray {
+    private $array; 
+    public function __construct($array) {
+        $this->array = $array;
+    }
+
+    public function sum() {
+        return array_sum($this->array);
+    }
+
+    public function average() {
+        $sum = $this->sum();
+        $count = count($this->array);
+        return $sum / $count;
+    }
+
+    public function max() {
+        return max($this->array);
+    }
+}
+
+$arrayObj = new IntegerArray([5, 10, 3, 8, 2]);
+
+$sum = $arrayObj->sum();
+echo "Sum: " . $sum . "<br>";
+
+$average = $arrayObj->average();
+echo "Average: " . $average . "<br>";
+
+$max = $arrayObj->max();
+echo "Maximum value: " . $max . "<br>";
+
+class Clock {
+    private $hour;
+    private $minute;
+    private $second;
+
+    public function __construct($hour, $minute, $second) {
+        $this->hour = $hour;
+        $this->minute = $minute;
+        $this->second = $second;
+    }
+
+    public function displayTime() {
+        $form = sprintf("%02d:%02d:%02d",$this->hour,$this->minute,$this->second);
+        return $form;
+    }
+
+    public function increaseTime() {
+        $this->second++;
+        if ($this->second >= 60) {
+            $this->minute++;
+            $this->second = 0;
+        }
+        if ($this->minute >= 60) {
+            $this->hour++;
+            $this->minute = 0;
+        } 
+        if ($this->hour >= 24 ) {
+            $this->hour = 0;
+        }
+    }
+}
+
+$clock = new Clock(12, 59, 59);
+
+echo "Current time: " . $clock->displayTime() . "<br>";
+$clock->increaseTime();
+echo "Updated time: " . $clock->displayTime() . "<br>";
